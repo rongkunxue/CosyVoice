@@ -130,9 +130,9 @@ class CosyVoice2(CosyVoice):
         self.instruct = True if '-Instruct' in model_dir else False
         self.model_dir = model_dir
         self.fp16 = fp16
-        if not os.path.exists(model_dir):
-            model_dir = snapshot_download(model_dir)
-        with open('{}/cosyvoice.yaml'.format(model_dir), 'r') as f:
+        # if not os.path.exists(model_dir):
+        #     model_dir = snapshot_download(model_dir)
+        with open('/root/Github/CosyVoice/pretrained_models/CosyVoice2-0.5B/cosyvoice.yaml'.format(model_dir), 'r') as f:
             configs = load_hyperpyyaml(f, overrides={'qwen_pretrain_path': os.path.join(model_dir, 'CosyVoice-BlankEN')})
         assert get_model_type(configs) == CosyVoice2Model, 'do not use {} for CosyVoice2 initialization!'.format(model_dir)
         self.frontend = CosyVoiceFrontEnd(configs['get_tokenizer'],

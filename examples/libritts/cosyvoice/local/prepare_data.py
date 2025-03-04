@@ -3,14 +3,18 @@ import logging
 import glob
 import os
 from tqdm import tqdm
-
+from pathlib import Path
 
 logger = logging.getLogger()
 
 
 def main():
-    wavs = list(glob.glob('{}/*/*/*wav'.format(args.src_dir)))
-
+    my_path=Path(args.src_dir)
+    print (args.src_dir)
+    wavs = [
+        str(file)
+        for file in my_path.glob(f"**/*.wav")
+    ]
     utt2wav, utt2text, utt2spk, spk2utt = {}, {}, {}, {}
     for wav in tqdm(wavs):
         txt = wav.replace('.wav', '.normalized.txt')
